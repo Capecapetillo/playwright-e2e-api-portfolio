@@ -17,6 +17,12 @@
   "homepage": "https://github.com/Capecapetillo/playwright-e2e-api-portfolio#readme",
   "devDependencies": {
     "@playwright/test": "^1.62.1",
-    "@types/node": "^26.1.2"
+    "@types/node": "^26.1.2",
+    "install": "^0.13.0",
+    "typescript": "^7.0.2",
+    "typescriptnpm": "^1.0.1"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2"
   }
 }
