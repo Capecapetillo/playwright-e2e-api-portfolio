@@ -9,7 +9,7 @@ test('User can log in successfully', async ({ page }) => {//page is called a fix
 
   if (!username || !password) {
     throw new Error(
-      'SAUCE_USERNAME and SAUCE_PASSWORD must be defined in the .env file.'
+      'SAUCE_USERNAME and SAUCE_PASSWORD environment variables must be defined.'
     );
   }
 
