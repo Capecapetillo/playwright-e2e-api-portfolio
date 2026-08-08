@@ -12,9 +12,9 @@ export class CheckoutInformationPage extends BasePage {
     constructor(page: Page) {
     super(page);
 
-    this.firstNameInput = page.getByTestId('first-name');
-    this.lastNameInput = page.getByTestId('last-name');
-    this.postalCodeInput = page.getByTestId('postal-code');
+    this.firstNameInput = page.getByTestId('firstName');
+    this.lastNameInput = page.getByTestId('lastName');
+    this.postalCodeInput = page.getByTestId('postalCode');
     this.continueButton = page.getByTestId('continue');
     }
 

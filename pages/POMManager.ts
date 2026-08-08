@@ -4,6 +4,7 @@ import { InventoryPage } from './InventoryPage';
 import { CartPage } from './CartPage';
 import { CheckoutInformationPage } from './CheckoutInformationPage';
 import { CheckoutOverviewPage } from './CheckoutOverviewPage';
+import { CheckoutCompletePage } from './CheckoutCompletePage';
 
 export class POMManager {
   readonly loginPage: LoginPage;
@@ -11,6 +12,7 @@ export class POMManager {
   readonly cartPage: CartPage;
   readonly checkoutOverviewPage: CheckoutOverviewPage;
   readonly checkoutInformationPage: CheckoutInformationPage;
+  readonly checkoutCompletePage: CheckoutCompletePage;
   
   constructor(page: Page) {
     this.loginPage = new LoginPage(page);
@@ -18,5 +20,6 @@ export class POMManager {
     this.cartPage = new CartPage(page);
     this.checkoutInformationPage = new CheckoutInformationPage(page); 
     this.checkoutOverviewPage = new CheckoutOverviewPage(page);
+    this.checkoutCompletePage = new CheckoutCompletePage(page);
     }
 }

@@ -1,7 +1,7 @@
-import { test } from '@playwright/test';//We're importing Playwright's test function.
-import { POMManager } from '../../pages/POMManager';//We import our Page Object Manager.
+import { test } from '@playwright/test';
+import { POMManager } from '../../pages/POMManager';
 
-test('User can log in successfully', async ({ page }) => {//page is called a fixture
+test('User can log in successfully', async ({ page }) => {
   const pm = new POMManager(page);
 
   const username = process.env.SAUCE_USERNAME;
