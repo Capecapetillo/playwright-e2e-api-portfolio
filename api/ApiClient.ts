@@ -1,5 +1,8 @@
 import { APIRequestContext } from '@playwright/test';
 
 export class ApiClient {
-  constructor(private request: APIRequestContext) {}
+  constructor(
+    protected request: APIRequestContext,
+    protected baseUrl: string
+    ) {}
 }
