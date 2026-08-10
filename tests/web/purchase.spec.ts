@@ -1,30 +1,15 @@
-import { test } from '@playwright/test';
+import { test } from '../../fixtures/authFixture';
 import { POMManager } from '../../pages/POMManager';
 import { checkoutData } from '../../test-data/checkoutData';
 
-test('User can purchase a backpack', async ({ page }) => {
-    const pm = new POMManager(page);
-
-    const username = process.env.SAUCE_USERNAME;
-  const password = process.env.SAUCE_PASSWORD;
-
-  if (!username || !password) {
-    throw new Error(
-      'SAUCE_USERNAME and SAUCE_PASSWORD environment variables must be defined.'
-    );
-  }
-    await pm.loginPage.open();
-    await pm.loginPage.login(username, password);
-    await pm.inventoryPage.verifyInventoryPageLoaded();
+test('User can purchase a backpack', async ({ pm }) => {
     await pm.inventoryPage.addBackpackToCart();
     await pm.inventoryPage.openShoppingCart();
-
     await pm.cartPage.verifyProductIsInCart(
         checkoutData.expectedProductName
     );
 
     await pm.cartPage.goToCheckout();
-
     await pm.checkoutInformationPage.fillCheckoutInformation(
         checkoutData.firstName, 
         checkoutData.lastName, 
@@ -32,7 +17,6 @@ test('User can purchase a backpack', async ({ page }) => {
     );
 
     await pm.checkoutInformationPage.continueCheckout();
-
     await pm.checkoutOverviewPage.verifyCheckoutOverview(
         checkoutData.expectedPaymentInfo, 
         checkoutData.expectedShippingInfo
@@ -44,9 +28,7 @@ test('User can purchase a backpack', async ({ page }) => {
         checkoutData.expectedTotalPrice
     );
 
-
     await pm.checkoutOverviewPage.finishCheckout();
-
     await pm.checkoutCompletePage.verifyorderCompleted(
         checkoutData.expectedCompleteMessage
     );
