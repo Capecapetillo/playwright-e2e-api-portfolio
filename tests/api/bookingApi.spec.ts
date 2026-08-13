@@ -35,33 +35,16 @@ test('User can create and retrieve a booking', async ({ bookingApi }) => {
   expect(getBody.additionalneeds).toBe(bookingData.additionalneeds);
 });
 
-test('User can update a booking', async ({ bookingApi, authApi }) => {
-  
-  const username = process.env.BOOKER_USERNAME;
-  const password = process.env.BOOKER_PASSWORD;
-  if (!username || !password) {
-  throw new Error(
-    'BOOKER_USERNAME and BOOKER_PASSWORD must be defined.'
-  );
-}
-
-  
+test('User can update a booking', async ({ bookingApi, token }) => {
   // 1. Create a booking
   const createResponse = await bookingApi.createBooking(bookingData);
   expect(createResponse).toBeOK();
+
   const createBody = await createResponse.json();
-  console.log(createBody);
   const bookingId = createBody.bookingid;
+
   expect(bookingId).toBeDefined();
-
-  // 2. Authenticate
-  const authResponse = await authApi.authenticate(username, password);
-  expect(authResponse).toBeOK();
-  const authBody = await authResponse.json();
-  const token = authBody.token;
-  expect(token).toBeDefined();
-
-   //update
+//update
   const updateResponse = await bookingApi.updateBooking(
   bookingId,
   updatedBookingData,
@@ -87,18 +70,7 @@ const getBody = await getResponse.json();
   expect(getBody.additionalneeds).toBe(updatedBookingData.additionalneeds);
 });
 
-test('User can delete a booking', async ({ bookingApi, authApi }) => {
-
-  const username = process.env.BOOKER_USERNAME;
-  const password = process.env.BOOKER_PASSWORD;
-
-  if ( !username || !password) {
-    throw new Error(
-      'API_BASE_URL, BOOKER_USERNAME and BOOKER_PASSWORD must be defined.'
-    );
-  }
-
- 
+test('User can delete a booking', async ({ bookingApi, token }) => {
 
   // 1. Create a booking
   const createResponse = await bookingApi.createBooking(bookingData);
@@ -107,21 +79,10 @@ test('User can delete a booking', async ({ bookingApi, authApi }) => {
   console.log(createBody);
   const bookingId = createBody.bookingid;
   expect(bookingId).toBeDefined();
-
-    // 2. Authenticate
-  const authResponse = await authApi.authenticate(username, password);
-  expect(authResponse).toBeOK();
-  const authBody = await authResponse.json();
-  const token = authBody.token;
-  expect(token).toBeDefined();
-
-    // 3. Delete the booking
-    const deleteResponse = await bookingApi.deleteBooking(bookingId, token);
-    expect(deleteResponse).toBeOK();
-
-    // 4. Try to retrieve the deleted booking
+ // 3. Delete the booking
+  const deleteResponse = await bookingApi.deleteBooking(bookingId, token);
+  expect(deleteResponse).toBeOK();
+// 4. Try to retrieve the deleted booking
   const getResponse = await bookingApi.getBooking(bookingId);
   expect(getResponse.status()).toBe(404); // Expecting a 404 Not Found status since the booking has been deleted    
-  
-
-});
+  });

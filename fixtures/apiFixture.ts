@@ -5,6 +5,7 @@ import { AuthApi } from '../api/AuthApi';
 type ApiFixtures = {
   bookingApi: BookingApi;
   authApi: AuthApi;
+  token: string;
 };
 
 export const test = base.extend<ApiFixtures>({
