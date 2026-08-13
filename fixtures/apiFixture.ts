@@ -32,6 +32,37 @@ export const test = base.extend<ApiFixtures>({
 
     await use(authApi);
   },
+
+  token: async ({ authApi }, use) => {
+    const username = process.env.BOOKER_USERNAME;
+    const password = process.env.BOOKER_PASSWORD;
+
+    if (!username || !password) {
+      throw new Error(
+        'BOOKER_USERNAME and BOOKER_PASSWORD must be defined.'
+      );
+    }
+
+    const authResponse = await authApi.authenticate(username, password);
+
+    if (!authResponse.ok()) {
+      throw new Error(
+        `Authentication failed with status ${authResponse.status()}`
+      );
+    }
+
+    const authBody = await authResponse.json();
+    const token = authBody.token;
+
+    if (!token) {
+      throw new Error('Authentication token was not returned.');
+    }
+
+    await use(token);
+  },
 });
+
+
+
 
 export { expect } from '@playwright/test';
