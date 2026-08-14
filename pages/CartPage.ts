@@ -9,7 +9,6 @@ export class CartPage extends BasePage {
 
     constructor(page: Page) {
     super(page);
-
     this.productName = page.getByTestId('inventory-item-name');
     this.productDescription = page.getByTestId('inventory-item-desc');
     this.checkoutButton = page.getByTestId('checkout');
