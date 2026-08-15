@@ -26,4 +26,5 @@ export class InventoryPage extends BasePage {
   async openShoppingCart() {
     await this.shoppingCart.click();
   }
+  
 }
